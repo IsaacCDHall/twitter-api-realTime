@@ -12,7 +12,7 @@ const io = socketio(server);
 
 app.use(bodyParser.json());
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 require("./routes/tweets.js")(app, io);
 
