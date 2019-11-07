@@ -19,3 +19,5 @@ require("./routes/tweets.js")(app, io);
 server.listen(port, () => {
   console.log("server is up");
 });
+
+// establish socket io connection
