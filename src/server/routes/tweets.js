@@ -11,7 +11,7 @@ module.exports = (app, io) => {
   let socketConnection;
   let twitterStream;
 
-  app.locals.searchTerm = "JavaScript"; //Default search term for twitter stream.
+  app.locals.searchTerm = "cake"; //Default search term for twitter stream.
   app.locals.showRetweets = false; //Default
 
   /**
@@ -44,6 +44,7 @@ module.exports = (app, io) => {
     app.locals.searchTerm = term;
     twitterStream.destroy();
     stream();
+    console.log(req.body.term);
   });
 
   /**
@@ -51,6 +52,7 @@ module.exports = (app, io) => {
    */
   app.post("/pause", (req, res) => {
     console.log("Pause");
+    console.log(req.body.term);
     twitterStream.destroy();
   });
 
@@ -58,6 +60,7 @@ module.exports = (app, io) => {
    * Resumes the twitter stream.
    */
   app.post("/resume", (req, res) => {
+    console.log(req.body.term);
     console.log("Resume");
     stream();
   });

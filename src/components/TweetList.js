@@ -1,12 +1,12 @@
 import React from "react";
-import { TransitionGroup } from "react-transition-group";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import socketIOClient from "socket.io-client";
 import CardComponent from "./CardComponent";
 
 class TweetList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { items: [], searchTerm: "JavaScript" };
+    this.state = { items: [], searchTerm: "cake" };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -21,6 +21,7 @@ class TweetList extends React.Component {
   handleKeyPress(event) {
     if (event.key === "Enter") {
       this.handleResume();
+      console.log("hit enter");
     }
   }
 
@@ -33,6 +34,7 @@ class TweetList extends React.Component {
       },
       body: JSON.stringify({ term })
     });
+    console.log(term);
   }
 
   handlePause(event) {
@@ -50,7 +52,7 @@ class TweetList extends React.Component {
     socket.on("connect", () => {
       console.log("Socket Connected");
       socket.on("tweets", data => {
-        console.info(data);
+        
         let newList = [data].concat(this.state.items.slice(0, 15));
         this.setState({ items: newList });
       });
@@ -66,13 +68,11 @@ class TweetList extends React.Component {
     let items = this.state.items;
 
     let itemsCards = (
-      <TransitionGroup
-        transitionName="example"
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={300}
-      >
+      <TransitionGroup>
         {items.map((x, i) => (
-          <CardComponent key={i} data={x} />
+          <CSSTransition key={i} timeout={500} classNames="item">
+            <CardComponent key={i} data={x} />
+          </CSSTransition>
         ))}
       </TransitionGroup>
     );
