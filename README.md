@@ -1,6 +1,8 @@
 # Twitter Twitter Little Star
 
-This app is a porfolio project showcasing my ability to create a real time application. I'm using react, express, and socket IO to display tweets. There is an issue with the number of calls I can make to the twitter api before my tokens are limited. Because of the constant stream of data and the number of requests being made, twitter limits the responses quite quickly. I encourage you to plug your own api keys in and try things out for yourself!
+I built a real time application using react, express, and socket IO to display tweets.
+
+![Gif](./preview.gif "gif")
 
 ## Getting Started
 
